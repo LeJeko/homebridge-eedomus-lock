@@ -13,4 +13,6 @@ Example config.json:
       ]
     }
 
+As of today, eedomus doesn't present lock accessories to its HomeKit bridge.
+You can use this homebridge plugin to repair that !
 Be careful, to finish set_url without a value like the example.
