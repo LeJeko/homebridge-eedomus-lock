@@ -52,7 +52,7 @@ eedomusLockAccessory.prototype.getState = function(callback) {
 eedomusLockAccessory.prototype.setState = function(state, callback) {
   var lockState = (state == Characteristic.LockTargetState.SECURED) ? "100" : "0";
 
-  this.log("Set state to %s", lockitronState);
+  this.log("Set state to %s", lockState);
 
   request.post({
     url: this.set_url+lockState
