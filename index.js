@@ -13,6 +13,7 @@ function eedomusLockAccessory(log, config) {
   this.name = config["name"];
   this.set_url = config["set_url"];
   this.get_url = config["get_url"];
+  this.refresh = config["refresh"] || "60"; // Every minute
   
   this.service = new Service.LockMechanism(this.name);
   
@@ -24,18 +25,30 @@ function eedomusLockAccessory(log, config) {
     .getCharacteristic(Characteristic.LockTargetState)
     .on('get', this.getState.bind(this))
     .on('set', this.setState.bind(this));
+    
+  setInterval(function() {
+          this.getState(function(err, state) {
+            if (err) {
+              temp = err;
+            }
+            this.service
+              .getCharacteristic(Characteristic.LockCurrentState).updateValue(state);
+          }.bind(this));
+        }.bind(this), this.refresh * 1000);
+
+   this.getState(function(err, state) {
+          this.service
+            .setCharacteristic(Characteristic.LockCurrentState, state);
+        }.bind(this));
 }
 
 eedomusLockAccessory.prototype.getState = function(callback) {
-  this.log("Getting current state...");
   
   request.get({url: this.get_url},
   function(err, response, body) {
     
     if (!err && response.statusCode == 200) {
       var json = JSON.parse(body);
-      var success = json.success;
-      this.log("Success is: %s", success);
       var theBody = json.body;
       var last_value = theBody.last_value; // 100 = "lock" or 0 = "unlock"
       this.log("Lock state is %s", last_value);
