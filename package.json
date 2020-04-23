@@ -1,6 +1,6 @@
 {
     "name": "homebridge-eedomus-lock",
-    "version": "0.3.2",
+    "version": "0.3.3",
     "description": "Homebridge plug-in for eedomus lock accessory",
     "author": {
         "name": "LeJeko"

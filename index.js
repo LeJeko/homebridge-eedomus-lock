@@ -44,11 +44,10 @@ function eedomusLockAccessory(log, config) {
         var periph_id = query.periph_id;
         var last_value = query.last_value;
         res.send('Got it!');
-        that.log(periph_id + " " + that.periph_id);
         if (periph_id == that.periph_id) {
           var currentState = (last_value == 100) ? Characteristic.LockCurrentState.SECURED : Characteristic.LockCurrentState.UNSECURED;
           that.service.setCharacteristic(Characteristic.LockCurrentState, currentState);
-          that.log('State changed to: %s', currentState);
+          that.log('State changed to %s', (currentState == 1) ? "locked" : "unlocked" );
         }
     });
     
