@@ -38,7 +38,7 @@ function eedomusLockAccessory(log, config) {
 
     that = this;
 
-    app.get('/' + this.path + '/', function (req, res) {
+    app.get('/' + that.path + '/', function (req, res) {
         var query = req.query;
         that.log('Data received: %s', JSON.stringify(query));
         var periph_id = query.periph_id;
@@ -51,9 +51,9 @@ function eedomusLockAccessory(log, config) {
         }
     });
     
-    app.listen(this.port, function () {
+    app.listen(that.port, function () {
     
-      that.log('Listening at http://localhost:%s/%s/', this.port, this.path);
+      that.log('Listening at http://localhost:%s/%s/', that.port, that.path);
     
     });
   }
