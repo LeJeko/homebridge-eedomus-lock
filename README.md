@@ -1,12 +1,23 @@
-# Homebridge plug-in for eedomus lock
+<p align="center">
+  <a href="https://github.com/homebridge/homebridge"><img src="https://raw.githubusercontent.com/homebridge/branding/master/logos/homebridge-color-round-stylized.png" height="140"></a>
+</p>
 
+<span align="center">
+
+# homebridge-eedomus-lock
+
+[![npm](https://img.shields.io/npm/v/homebridge-eedomus-lock.svg)](https://www.npmjs.com/package/homebridge-eedomus-lock) [![npm](https://img.shields.io/npm/dt/homebridge-eedomus-lock.svg)](https://www.npmjs.com/package/homebridge-eedomus-lock)
+
+</span>
+
+## Description
 To date, eedomus does not present locking accessories to its HomeKit bridge. You can use this plugin to fix this!
 
 **Please note, since version 0.3.0, the config.json structure has changed and must be modified before restarting homebridge.**
 
 This version add support for push update via eedomus webhook for real time response. You can still use it with auto refresh instead if you don't want to create a webhook.
 
-### Options
+### Parameters
 
 **accessory** : "eedomusLock" (Mandatory)  
 **name** : Name in HomeKit  
@@ -15,6 +26,24 @@ This version add support for push update via eedomus webhook for real time respo
 **api_user** : eedomus API user  
 **api_secret** : eedomus API secret  
 **refresh** : refresh interval in seconds
+
+## config.json
+```
+"accessories": [
+    {
+    "accessory": "eedomusLock",
+    "name": "Door lock",
+    "periph_id" : 1234567,
+    "eedomus_ip" : "x.x.x.x",
+    "api_user" : "XXXXXXX",
+    "api_secret" : "YYYYYYY",
+    "refresh" : 60,
+    "push" : true,
+    "path" : "eedomus-lock",
+    "port" : 3210
+    }
+]
+```
 
 ### Push options
 
@@ -37,22 +66,4 @@ To avoid potential conflict with any other web service, the default path and por
 **path** : webserver path to listen (default: "eedomus-lock")  
 **port** : webserver port to listen (default: 3210)
 
-##config.json example:
-
-```json
-"accessories": [
-    {
-    "accessory": "eedomusLock",
-    "name": "Door lock",
-    "periph_id" : 1234567,
-    "eedomus_ip" : "x.x.x.x",
-    "api_user" : "XXXXXXX",
-    "api_secret" : "YYYYYYY",
-    "refresh" : 60,
-    "push" : true,
-    "path" : "eedomus-lock",
-    "port" : 3210
-    }
-]
-```
 
